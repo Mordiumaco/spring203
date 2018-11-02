@@ -1,15 +1,19 @@
 package kr.or.ddit.hello;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.user.model.UserVo;
 
@@ -32,6 +36,19 @@ import kr.or.ddit.user.model.UserVo;
 public class HelloController {
 	
 	private Logger logger = LoggerFactory.getLogger(HelloController.class);
+	
+	@RequestMapping
+	public String main(Model model) {
+		List<String> rangers = new ArrayList<>();
+		rangers.add("brown");
+		rangers.add("cony");
+		rangers.add("sally");
+		
+		model.addAttribute("rangers", rangers);
+		model.addAttribute("message", "hi. hello.jsp");
+		return "hello";
+	}
+	
 	
 	// 사용자 요청 : localhost:8081/hello/hello.do url로 요청을 하게 되면
 	// 아래의 메서드에서 요청을 처리 
@@ -74,16 +91,17 @@ public class HelloController {
 	}
 	
 	@RequestMapping("request")
-	public String request(HttpServletRequest request) {
+	public String request(HttpServletRequest request, Model model) {
 		
 		//기존 servlet 파라미터 확인 방식
 		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
-		
+		String pass = request.getParameter("password");
+		model.addAttribute("userId", userId+"_attr");
+		model.addAttribute("pass", pass+"_attr");
 		
 		//logger를 이용한 출력
 		logger.debug("userId : {}", userId);
-		logger.debug("password : {}", password);
+		logger.debug("password : {}", pass);
 		
 		
 		return "hello";
@@ -96,6 +114,40 @@ public class HelloController {
 		logger.debug("userVo : {}", userVo);
 		
 		return "hello";
+	}
+	
+	//spring mvc controller 메소드의 리턴타입
+	//1. String -> view name
+	//2. ModelAndView -> 스프링 제공 객체
+	//3. void -> response 객체에 개발자가 직접 응답을 작성 
+	//ModelAndView
+	//http://localhost:8081/hello/modelAndView
+	@RequestMapping("/modelAndView")
+	public ModelAndView medelAndView(){
+		ModelAndView mav = new ModelAndView();
+		
+		List<String> rangers = new ArrayList<>();
+		rangers.add("brown");
+		rangers.add("cony");
+		rangers.add("sally");
+
+		//model
+		mav.addObject("rangers", rangers);
+		mav.setViewName("hello");
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping("/void")
+	public void voidMethod(HttpServletResponse response) throws IOException {
+		PrintWriter writer = response.getWriter();
+		
+		writer.write("<html>");
+		writer.write("sproing voidMethod");
+		writer.write("</html>");
+		
+		
 	}
 }
 	

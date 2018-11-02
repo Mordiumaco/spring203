@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	hello.jsp
+	hello.jsp<br/>
+	
+	${message}<br/>
 	
 	<h2>rangers</h2>
 	<c:forEach items="${rangers}" var="ranger">

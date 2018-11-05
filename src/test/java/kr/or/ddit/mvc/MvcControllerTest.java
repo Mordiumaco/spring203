@@ -22,7 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @SuppressWarnings("unchecked")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations= {"classpath:kr/or/ddit/config/spring/servlet-context.xml"})
+@ContextConfiguration(locations= {"classpath:kr/or/ddit/config/spring/servlet-context.xml",
+		"classpath:kr/or/ddit/config/spring/root-context.xml"})
 @WebAppConfiguration 
 public class MvcControllerTest {
 
@@ -62,5 +63,18 @@ public class MvcControllerTest {
 		assertEquals(4, rangers.size());
 		
 	}
+	
+	
+	@Test
+	public void fileuploadViewTest() throws Exception {
+		/***Given***/
+		MvcResult mvcResult = mockMvc.perform(get("/mvc/fileupload")).andReturn();
 
+		/***When***/
+		ModelAndView mav = mvcResult.getModelAndView();
+		
+		/***Then***/
+		assertEquals("mvc/fileuploadView", mav.getViewName());
+		
+	}
 }

@@ -35,5 +35,6 @@
 		<property name="maxUploadSize" value="26214400"></property>
 	</bean>	
 	
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"></bean>
 	
 </beans>

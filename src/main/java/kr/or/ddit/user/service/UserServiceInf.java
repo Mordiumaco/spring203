@@ -25,6 +25,8 @@ public interface UserServiceInf {
 	*/
 	public Map<String, Object> selectUserPageList(PageVo page);
 	
+	
+	
 	/**
 	* Method : getUserCnt
 	* 작성자 : pc20

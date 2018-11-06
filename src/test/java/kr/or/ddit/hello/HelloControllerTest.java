@@ -22,25 +22,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.or.ddit.test.ControllerTestConfig;
 import kr.or.ddit.user.model.UserVo;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations= {"classpath:kr/or/ddit/config/spring/servlet-context.xml", "classpath:kr/or/ddit/config/spring/root-context.xml"})
-@WebAppConfiguration    //spring ioc 컨테이너 구성을 web 환경에 맞게 구성
-public class HelloControllerTest {
+public class HelloControllerTest extends ControllerTestConfig{
 	
 	private Logger logger = LoggerFactory.getLogger(HelloControllerTest.class);
 	
-	@Autowired
+	/*@Autowired
 	private WebApplicationContext ctx; //spring ioc 컨테이너
 	
 	private MockMvc mockMvc; // dispatcher servlet (front controller) 역할을 하는 친구
-	
-	@Before
-	public void setup() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
-	}
-	
+*/	
 	@Test
 	public void test() throws Exception {
 		/***Given***/

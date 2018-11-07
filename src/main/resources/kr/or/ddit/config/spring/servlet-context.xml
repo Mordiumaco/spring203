@@ -17,14 +17,26 @@
 	
 	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 
 	
+	<!-- view resolver -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"/>	
+	</bean>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/view/"></property>
-		<property name="suffix" value=".jsp"></property>
+		<property name="order" value="1"/>
+		<property name="prefix" value="/WEB-INF/view/"/>
+		<property name="suffix" value=".jsp"/>
 	</bean>
+	
+	<!-- json 처리용 view -->
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	<bean id="timesTablesView" class="kr.or.ddit.mvc.view.TimesTablesView"/>
+	
+	
 	<!-- hello : /WEB-INF/view/hello.jsp -->
 	
 	<!-- multipart Resolver 설정 
@@ -35,6 +47,19 @@
 		<property name="maxUploadSize" value="26214400"></property>
 	</bean>	
 	
+	<!-- type -->
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"></bean>
+	
+	
+	<!-- messageSource -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:kr/or/ddit/config/msg/error</value>
+			</list>
+		</property>
+	</bean>
+	
+	
 	
 </beans>

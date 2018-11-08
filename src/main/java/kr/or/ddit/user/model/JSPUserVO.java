@@ -1,5 +1,6 @@
 package kr.or.ddit.user.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -21,8 +22,13 @@ public class JSPUserVO implements HttpSessionBindingListener{
 	private String tel;
 	private String profile;
 	private Integer rnum;
+	private String fommatbirth;
 	
-	
+	public String getFommatbirth() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		this.fommatbirth =  sdf.format(birth);
+		return fommatbirth;
+	}
 	public Integer getRnum() {
 		return rnum;
 	}
@@ -89,6 +95,7 @@ public class JSPUserVO implements HttpSessionBindingListener{
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+	
 	
 	public boolean authPass(String encryptPass){
 		return getPassword().equals(encryptPass);

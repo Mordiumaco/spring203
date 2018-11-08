@@ -39,7 +39,7 @@ public class UserController {
 	public String userAllList(Model model) {
 		//userService 사용자 전체 정보 조회 
 		List<JSPUserVO> userList = userService.selectUserAll();
-		
+
 		model.addAttribute("user_list", userList);
 		
 		return "user/userAllList";
@@ -48,12 +48,30 @@ public class UserController {
 	@RequestMapping("/userPageList")
 	public String userPageList(Model model, PageVo pageVo) {
 		
-		Map<String, Object> resultMaps = userService.selectUserPageList(pageVo);
+	/*	Map<String, Object> resultMaps = userService.selectUserPageList(pageVo);
 		model.addAllAttributes(resultMaps);
-		
+		*/
 		//
 		
 		return "user/userPagingList";
+	}
+	
+	@RequestMapping("/userPageListAjax")
+	public String userPageListAjax(Model model, PageVo pageVo) {
+		
+		Map<String, Object> resultMaps = userService.selectUserPageList(pageVo);
+		model.addAllAttributes(resultMaps);
+		//
+		return "jsonView";
+	}
+	
+	@RequestMapping("/userPageListAjaxHtml")
+	public String userPageListAjaxHtml(Model model, PageVo pageVo) {
+		
+		Map<String, Object> resultMaps = userService.selectUserPageList(pageVo);
+		model.addAllAttributes(resultMaps);
+		//
+		return "user/pageListHtml";
 	}
 	
 	//param annotation을 이용해서 해보자 

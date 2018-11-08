@@ -10,6 +10,18 @@
 			<mvc:mapping path="/**"/>
 			<bean class="kr.or.ddit.interceptor.PerformanceCheckInterceptor"></bean>
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="lang"></property>			
+			</bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 
+	<!-- locale 관련 내용 -->
+		<!-- localeResolver: 로케일에 대한 저장 위치 -->
+		<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		</bean>
+		<!-- 파라미터를 통한 로케일 정보 수정 -->
 </beans>

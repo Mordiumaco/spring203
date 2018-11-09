@@ -18,7 +18,7 @@
 	</a></li>
 
 <c:forEach begin="1" end="${pageCnt}" var="i">
-	<li><a href="/user/userPageList?page=${i}&pageSize=10">${i}</a></li>
+	<li><a href="javascript:getUserList(${i});">${i}</a></li>
 </c:forEach>
 
 <li><a href="javascript:getUserList(${pageCnt});" aria-label="Next">

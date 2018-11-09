@@ -8,7 +8,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //service, dao 에 대한 설정파일만 필요하다. 
-@ContextConfiguration(locations= {"classpath:kr/or/ddit/config/spring/root-context.xml"})
+@ContextConfiguration(locations= {"classpath:kr/or/ddit/config/spring/root-context.xml",
+		"classpath:kr/or/ddit/config/spring/datasource-context.xml",
+		"classpath:kr/or/ddit/config/spring/transaction-context.xml"})
 public class ServiceDaoTestConfig {
 	
 	

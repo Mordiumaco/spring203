@@ -24,10 +24,23 @@ public class JSPUserVO implements HttpSessionBindingListener{
 	private Integer rnum;
 	private String fommatbirth;
 	
+	public JSPUserVO() {
+		
+	}
+	
+	public JSPUserVO(String userId, String name) {
+		this.userId = userId;
+		this.name = name;
+	}
+	
 	public String getFommatbirth() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		this.fommatbirth =  sdf.format(birth);
-		return fommatbirth;
+		if(this.birth != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			this.fommatbirth =  sdf.format(birth);
+			return fommatbirth;
+		}else {
+			return "";
+		}
 	}
 	public Integer getRnum() {
 		return rnum;

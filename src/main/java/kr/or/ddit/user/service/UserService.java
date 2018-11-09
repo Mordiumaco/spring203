@@ -54,13 +54,12 @@ public class UserService implements UserServiceInf{
 	@Override
 	public Map<String, Object> selectUserPageList(PageVo page) {
 		//교수님 방식
-		UserDao userDao = new UserDao();
 		
 		//페이지에 해당하는 유저 리스트(1~10건 사이) 
-		List<JSPUserVO> userList = userDao.selectUserPageList(page);
+		List<JSPUserVO> userList = dao.selectUserPageList(page);
 		
 		//페이지 내비게이션을 위한 전체 유저 리스트 조회
-		int totalUserCnt = userDao.getUserCnt();
+		int totalUserCnt = dao.getUserCnt();
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("userList", userList);

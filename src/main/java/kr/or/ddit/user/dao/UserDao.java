@@ -2,11 +2,11 @@ package kr.or.ddit.user.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import kr.or.ddit.config.db.SQLFactoryBuilder;
 import kr.or.ddit.user.model.JSPUserVO;
 import kr.or.ddit.util.model.PageVo;
 
@@ -14,17 +14,16 @@ import kr.or.ddit.util.model.PageVo;
 @Repository("userDao")
 public class UserDao implements UserDaoInf{
 	
+	@Resource(name="sqlSessionTemplate")
+	private SqlSessionTemplate template;
 	//jspuser 테이블 데이터 전체 조회 쿼리 
 	//select query id : selectUserAll
 	
 	public List<JSPUserVO> selectUserAll(){
 		
-		SqlSessionFactory factory = SQLFactoryBuilder.getSqlSessionFactory();
 		
-		SqlSession session = factory.openSession();
 		
-		List<JSPUserVO> userList = session.selectList("userSQL.selectUserAll");
-		session.close();
+		List<JSPUserVO> userList = template.selectList("userSQL.selectUserAll");
 		//selectOne: 데이터가 한건일때
 		//selectList: 여러건의 데이터를 조회 
 		//메서드 인자: 문자열 = 네임스페이스(모듈명).쿼리아이디
@@ -33,32 +32,21 @@ public class UserDao implements UserDaoInf{
 	
 	public JSPUserVO selectUser(String userId){
 		
-		SqlSessionFactory factory = SQLFactoryBuilder.getSqlSessionFactory();
-		
-		SqlSession session = factory.openSession();
-		
 		//selectOne: 데이터가 한건일때
 		//selectList: 여러건의 데이터를 조회 
 		//메서드 인자: 문자열 = 네임스페이스(모듈명).쿼리아이디
-		JSPUserVO userVo = session.selectOne("userSQL.selectUser", userId);
-		session.close();
+		JSPUserVO userVo = template.selectOne("userSQL.selectUser", userId);
 		
 		return userVo;
 	}
 	
 	public JSPUserVO selectUserByUserVO(JSPUserVO user){
 		
-		SqlSessionFactory factory = SQLFactoryBuilder.getSqlSessionFactory();
-		
-		SqlSession session = factory.openSession();
-		
 		//selectOne: 데이터가 한건일때
 		//selectList: 여러건의 데이터를 조회 
 		//메서드 인자: 문자열 = 네임스페이스(모듈명).쿼리아이디
-		JSPUserVO userVo = session.selectOne("userSQL.selectUserByUserVO", user);
+		JSPUserVO userVo = template.selectOne("userSQL.selectUserByUserVO", user);
 		//꼭 세션을 닫아주자 그래야 커밋이 제대로 된다. 마이바티스의 경우
-		
-		session.close();
 		
 		return userVo;
 	}
@@ -75,17 +63,13 @@ public class UserDao implements UserDaoInf{
 	@Override
 	public List<JSPUserVO> selectUserPageList(PageVo page) {
 		
-		SqlSessionFactory factory = SQLFactoryBuilder.getSqlSessionFactory();
-		
-		SqlSession session = factory.openSession();
 		
 		//selectOne: 데이터가 한건일때
 		//selectList: 여러건의 데이터를 조회 
 		//메서드 인자: 문자열 = 네임스페이스(모듈명).쿼리아이디
 		
-		List<JSPUserVO> userList = session.selectList("userSQL.selectUserPageList", page);
+		List<JSPUserVO> userList = template.selectList("userSQL.selectUserPageList", page);
 		//꼭 세션을 닫아주자 그래야 커밋이 제대로 된다. 마이바티스의 경우
-		session.close();
 		
 		return userList;
 	}
@@ -99,11 +83,7 @@ public class UserDao implements UserDaoInf{
 	*/
 	@Override
 	public int getUserCnt() {
-		SqlSessionFactory factory = SQLFactoryBuilder.getSqlSessionFactory();
-		
-		SqlSession session = factory.openSession();
-		int totalUserCnt = session.selectOne("userSQL.getUserCnt");
-		session.close();
+		int totalUserCnt = template.selectOne("userSQL.getUserCnt");
 		
 		return totalUserCnt;
 	}
@@ -118,16 +98,9 @@ public class UserDao implements UserDaoInf{
 	*/
 	@Override
 	public int insertUser(JSPUserVO user) {
-		
-		SqlSessionFactory factory = SQLFactoryBuilder.getSqlSessionFactory();
-		
-		SqlSession session = factory.openSession();
-		
-		int insertCnt = session.insert("userSQL.insertUser", user);
+		int insertCnt = template.insert("userSQL.insertUser", user);
 		
 		//insert 한 후에는 꼭 커밋을 해주자!
-		session.commit();
-		session.close();
 		
 		return insertCnt;
 	}
@@ -145,14 +118,7 @@ public class UserDao implements UserDaoInf{
 	@Override
 	public int deleteUser(String userId) {
 		
-		SqlSessionFactory factory = SQLFactoryBuilder.getSqlSessionFactory();
-		
-		SqlSession session = factory.openSession();
-		
-		int deleteCnt = session.delete("userSQL.deleteUser", userId);
-		
-		session.commit();
-		session.close();
+		int deleteCnt = template.delete("userSQL.deleteUser", userId);
 		
 		return deleteCnt;
 	}
@@ -160,13 +126,7 @@ public class UserDao implements UserDaoInf{
 	@Override
 	public int updateProfile(JSPUserVO user) {
 		
-		SqlSessionFactory factory = SQLFactoryBuilder.getSqlSessionFactory();
-		
-		SqlSession session = factory.openSession();
-		
-		int updateCnt = session.update("userSQL.updateProfile", user);
-		session.commit();
-		session.close();
+		int updateCnt = template.update("userSQL.updateProfile", user);
 		
 		return updateCnt;
 	}

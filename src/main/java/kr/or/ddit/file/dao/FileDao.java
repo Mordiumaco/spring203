@@ -1,7 +1,10 @@
 package kr.or.ddit.file.dao;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.config.db.SQLFactoryBuilder;
@@ -10,12 +13,10 @@ import kr.or.ddit.file.model.FileVo;
 //spring bean으로 등록 @Repository(이름을 안붙이면 class명에서 앞글자만 소문자로 변경한 텍스트가 spring bean이름이 됨) 
 @Repository //fileDao
 public class FileDao implements FileDaoInf {
-
-	SqlSessionFactory sessionFactory;
 	
-	public FileDao() {
-		sessionFactory = SQLFactoryBuilder.getSqlSessionFactory();
-	}
+	@Resource(name="sqlSessionTemplate")
+	private SqlSessionTemplate template;
+	
 	
 	/**
 	* Method : insertFile
@@ -28,14 +29,7 @@ public class FileDao implements FileDaoInf {
 	@Override
 	public int insertFile(FileVo fileVo) {
 		
-		SqlSession session = sessionFactory.openSession();
-		
-		//sql 호출 
-		int insertCnt = session.insert("file.insertFile", fileVo);
-		
-		//트랜젝션 commit, session close
-		session.commit();
-		session.close();
+		int insertCnt = template.insert("file.insertFile", fileVo);
 		
 		return insertCnt;
 	}

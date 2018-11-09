@@ -15,7 +15,8 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 //controller의 경우 service 스프링 빈을 주입받기 때문에 
 //service, dao 에 대한 설정파일도 필요하다. 
-@ContextConfiguration(locations= {"classpath:kr/or/ddit/config/spring/root-context.xml","classpath:kr/or/ddit/config/spring/servlet-context.xml"})
+@ContextConfiguration(locations= {"classpath:kr/or/ddit/config/spring/root-context.xml","classpath:kr/or/ddit/config/spring/servlet-context.xml","classpath:kr/or/ddit/config/spring/datasource-context.xml",
+		"classpath:kr/or/ddit/config/spring/transaction-context.xml"})
 //스프링 컨테이너를 웹 기반에서 사용가능한 webApplicationContext 생성 
 @WebAppConfiguration
 public class ControllerTestConfig {

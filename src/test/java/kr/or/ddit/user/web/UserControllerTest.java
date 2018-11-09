@@ -1,7 +1,6 @@
 package kr.or.ddit.user.web;
 
-import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import org.junit.Before;
@@ -20,7 +19,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations= {"classpath:kr/or/ddit/config/spring/servlet-context.xml","classpath:kr/or/ddit/config/spring/root-context.xml"})
+@ContextConfiguration(locations= {"classpath:kr/or/ddit/config/spring/servlet-context.xml","classpath:kr/or/ddit/config/spring/root-context.xml","classpath:kr/or/ddit/config/spring/datasource-context.xml",
+		"classpath:kr/or/ddit/config/spring/transaction-context.xml"})
 @WebAppConfiguration
 public class UserControllerTest {
 	

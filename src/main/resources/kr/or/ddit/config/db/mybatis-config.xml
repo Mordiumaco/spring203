@@ -8,11 +8,14 @@
  	<typeAlias type="kr.or.ddit.file.model.FileVo" alias="fileVo"/>
  	<typeAlias type="kr.or.ddit.user.model.JSPUserVO" alias="JSPUserVO"/>
  	<typeAlias type="kr.or.ddit.prod.vo.ProdVO" alias="ProdVO"/>
+ 	<typeAlias type="kr.or.ddit.rangers.model.RangerVo" alias="rangerVo"/>
  </typeAliases>	
 	
   <mappers>
   	<mapper resource="kr/or/ddit/config/db/file.xml"/>
   	<mapper resource="kr/or/ddit/config/db/user.xml"/>
   	<mapper resource="kr/or/ddit/config/db/prod.xml"/>
+  	<mapper resource="kr/or/ddit/config/db/rangers.xml"/>
+  	<mapper resource="kr/or/ddit/config/db/util.xml"/>
   </mappers>
 </configuration>

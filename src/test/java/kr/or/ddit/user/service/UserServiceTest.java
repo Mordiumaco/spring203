@@ -34,7 +34,7 @@ public class UserServiceTest extends ServiceDaoTestConfig{
 		System.out.println(user_list.get(0).getName());
 		/***Then***/
 
-		assertEquals(105, user_list.size());
+		assertEquals(113, user_list.size());
 	}
 	
 	@Test
@@ -47,7 +47,7 @@ public class UserServiceTest extends ServiceDaoTestConfig{
 		/***Then***/
 		assertNotNull(user);
 		assertEquals("brown", user.getUserId());
-		assertEquals("brownpass", user.getPassword());
+		assertEquals("f01471c38113db263f9a532d8b6c054af31bf653aeea92d1c284cdd022b9", user.getPassword());
 	}
 	
 	@Test

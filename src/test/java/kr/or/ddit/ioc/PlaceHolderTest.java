@@ -24,7 +24,7 @@ public class PlaceHolderTest {
 		
 		logger.debug("PlaceHolder : {}", placeholder);
 		
-		assertEquals("pc20", placeholder.getUser());
+		assertEquals("pc20test", placeholder.getUser());
 		assertEquals("java", placeholder.getPassword());
 		
 	}

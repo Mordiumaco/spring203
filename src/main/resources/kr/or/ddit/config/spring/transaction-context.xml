@@ -20,4 +20,5 @@
 	<aop:config>
 		<aop:pointcut id="txAdvice" expression="execution(* kr.or.ddit..*Service.*(..))"/>
 	</aop:config>
+	
 </beans>

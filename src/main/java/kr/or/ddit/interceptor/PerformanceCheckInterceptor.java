@@ -17,7 +17,7 @@ public class PerformanceCheckInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		//request.setAttribute("start_time", System.currentTimeMillis());
+		request.setAttribute("start_time", System.currentTimeMillis());
 		
 		//다음 인터셉터로 연결
 		return true;
@@ -28,9 +28,9 @@ public class PerformanceCheckInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,ModelAndView modelAndView) throws Exception {
 		
 		//controller 메서드의 로직이 종료되고 실행 
-		//long end_time = System.currentTimeMillis();
-		//long start_time = (Long)request.getAttribute("start_time");
+		long end_time = System.currentTimeMillis();
+		long start_time = (Long)request.getAttribute("start_time");
 		
-		//logger.debug("duration : {} : {}",request.getRequestURI() ,(end_time-start_time));
+		logger.debug("duration : {} : {}",request.getRequestURI() ,(end_time-start_time));
 	}
 }

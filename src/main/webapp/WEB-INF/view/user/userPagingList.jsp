@@ -72,7 +72,7 @@
 		$.ajax({
 			
 			type: "GET",
-			url:"/user/userPageListAjax",
+			url:"/postPageListAjax",
 			data : "page="+page+"&pageSize="+pageSize,
 			success : function(data){
 				//data(사용자 json 데이터)를 바탕으로 
@@ -82,25 +82,7 @@
 				//3. 기존 리스트 위치에다가 붙여 넣기
 				console.log(data);
 				var html = "";
-				<%-- var litest ="";
-				litest +="<li>";
-				litest +=" <a href='javascript:getUserList(1);' aria-label='Previous'>";
-				litest +=" <span aria-hidden='true'>&laquo;</span>";
-				litest +="</a>";
-				litest +="</li>";
-				
-				litest +="<c:forEach begin='1' end='"+data.pageCnt+"' var='i'>";
-				litest +="<li><a href='/user/userPageList?page=${i}&pageSize=10'>${i}</a></li>";
-				litest +="</c:forEach>";
-				
-				litest +="<li>";
-				litest +=" <a href='javascript:getUserList("+data.pageCnt+");' aria-label='Next'>";
-				litest +="<span aria-hidden='true'>&raquo;</span>";
-				litest +="</a>";
-				litest +="</li>";
-				$(".pagination").html("");
-				$(".pagination").html(litest);  --%>
-				
+			
 				
 				$.each(data.userList, function(idx, user){
 					console.log(user);

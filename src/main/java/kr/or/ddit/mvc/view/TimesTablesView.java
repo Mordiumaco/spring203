@@ -14,7 +14,6 @@ public class TimesTablesView implements View{
 
 	@Override
 	public String getContentType() {
-		
 		return null;
 	}
 
@@ -25,13 +24,6 @@ public class TimesTablesView implements View{
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		
-		String str = request.getParameter("dan");
-		int value;
-		if(str != null) {
-			value = Integer.parseInt(request.getParameter("dan"));
-		}else {
-			value = 9;
-		}
 		
 		pw.println("<style type=\"text/css\">");
 		pw.println("td{");
@@ -50,7 +42,7 @@ public class TimesTablesView implements View{
 		
 		for(int i = 1; i < 9; i++){
 			pw.println("<tr>");
-			for(int j = 2; j < value; j++){
+			for(int j = 2; j < 10; j++){
 				pw.println("<td>"+j+"*"+i+"="+i*j+"</td>");
 			}
 			pw.println("<tr>");

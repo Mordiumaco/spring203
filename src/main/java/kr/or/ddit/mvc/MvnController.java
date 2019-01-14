@@ -82,7 +82,7 @@ public class MvnController {
 	//@pathVariable: 요청 url의 일부를 메소드 인자로 쉽게 받을 수 있는 어노테이션
 	//http://localhost:8081/mvc/central : logger central
 	//http://localhost:8081/mvc/left : logger left
-	@RequestMapping("/mvc/{libcd}/..")
+	@RequestMapping("/mvc/{libcd}/test")
 	public String pathVariable(@PathVariable("libcd") String libcd) {
 		
 		logger.debug("libcd : {}", libcd);

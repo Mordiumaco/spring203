@@ -10,12 +10,12 @@
 	<task:scheduler id="scheduler"/>
 	<task:scheduled-tasks scheduler="scheduler">
 		<!-- */5 매 5초마다 -->
-		<task:scheduled ref="springTask" method="logging" cron="*/5 * * * * *"/>
+		<!-- <task:scheduled ref="springTask" method="logging" cron="*/5 * * * * *"/> -->
 		<task:scheduled ref="springTask" method="makeMonthlyCalendar" 
-		cron="0 0 23 L * *"/>
-		<!-- 매달 마지막날 23시에 실행 -->
+		cron="0 0 3 1 * *"/>
+		<!-- 매달 1일 3시에 실행 -->
 		<!-- 초 분 시 일 월 일 -->		
-											
+		
 	</task:scheduled-tasks>
 
 </beans>
